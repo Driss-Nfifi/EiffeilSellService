@@ -1,0 +1,83 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from EiffelSellServiceService WSDL service -->
+
+  <service name="EiffelSellService" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://business.uge.fr"/>
+      <parameter name="wsdlServiceElement" value="EiffelSellServiceService"/>
+      <parameter name="schemaQualified" value="http://business.uge.fr,http://commun"/>
+      <parameter name="wsdlServicePort" value="EiffelSellService"/>
+      <parameter name="className" value="fr.uge.business.EiffelSellServiceSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="EiffelSellService"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="validerachatpanier" qname="operNS:validerachatpanier" xmlns:operNS="http://business.uge.fr" returnQName="retNS:validerachatpanierReturn" xmlns:retNS="http://business.uge.fr" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:p" xmlns:pns="http://business.uge.fr" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="totalpanier" qname="operNS:totalpanier" xmlns:operNS="http://business.uge.fr" returnQName="retNS:totalpanierReturn" xmlns:retNS="http://business.uge.fr" returnType="rtns:double" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:p" xmlns:pns="http://business.uge.fr" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="nouveauclient" qname="operNS:nouveauclient" xmlns:operNS="http://business.uge.fr" returnQName="retNS:nouveauclientReturn" xmlns:retNS="http://business.uge.fr" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:a" xmlns:pns="http://business.uge.fr" type="tns:Utilisateur" xmlns:tns="http://commun"/>
+        <parameter qname="pns:s" xmlns:pns="http://business.uge.fr" type="tns:double" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="viderpanier" qname="operNS:viderpanier" xmlns:operNS="http://business.uge.fr" returnQName="retNS:viderpanierReturn" xmlns:retNS="http://business.uge.fr" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:p" xmlns:pns="http://business.uge.fr" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="supprimervoiturepanier" qname="operNS:supprimervoiturepanier" xmlns:operNS="http://business.uge.fr" returnQName="retNS:supprimervoiturepanierReturn" xmlns:retNS="http://business.uge.fr" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:p" xmlns:pns="http://business.uge.fr" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:v" xmlns:pns="http://business.uge.fr" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getPanierbyutilisateur" qname="operNS:getPanierbyutilisateur" xmlns:operNS="http://business.uge.fr" returnQName="retNS:getPanierbyutilisateurReturn" xmlns:retNS="http://business.uge.fr" returnType="rtns:Panier" xmlns:rtns="http://commun" soapAction="" >
+        <parameter qname="pns:u" xmlns:pns="http://business.uge.fr" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="ajoutervoiturepanier" qname="operNS:ajoutervoiturepanier" xmlns:operNS="http://business.uge.fr" returnQName="retNS:ajoutervoiturepanierReturn" xmlns:retNS="http://business.uge.fr" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:p" xmlns:pns="http://business.uge.fr" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:u" xmlns:pns="http://business.uge.fr" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:v" xmlns:pns="http://business.uge.fr" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="getPanierbyutilisateur ajoutervoiturepanier nouveauclient validerachatpanier totalpanier viderpanier supprimervoiturepanier"/>
+
+      <typeMapping
+        xmlns:ns="http://commun"
+        qname="ns:Utilisateur"
+        type="java:commun.Utilisateur"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://commun"
+        qname="ns:Voiture"
+        type="java:commun.Voiture"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://commun"
+        qname="ns:Panier"
+        type="java:commun.Panier"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://commun"
+        qname="ns:Role"
+        type="java:commun.Role"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>

@@ -88,4 +88,9 @@ public class ServiceLocation implements IServiceLocation{
 		return service.GetNotificationByUtilisateur(idUtilisateur);
 	}
 
+	@Override
+	public Utilisateur GetUtilisateurByEmail(String email) throws RemoteException {
+		return service.GetUtilisateurByEmail(email);
+	}
+
 }

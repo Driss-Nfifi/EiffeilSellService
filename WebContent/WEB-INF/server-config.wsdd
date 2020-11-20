@@ -1,0 +1,91 @@
+<ns1:deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java" xmlns:ns1="http://xml.apache.org/axis/wsdd/">
+ <ns1:globalConfiguration>
+  <ns1:parameter name="sendMultiRefs" value="true"/>
+  <ns1:parameter name="disablePrettyXML" value="true"/>
+  <ns1:parameter name="adminPassword" value="admin"/>
+  <ns1:parameter name="attachments.Directory" value="D:\programation\Upem M2\EiffelWS\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\EiffelSellService\WEB-INF\attachments"/>
+  <ns1:parameter name="dotNetSoapEncFix" value="true"/>
+  <ns1:parameter name="enableNamespacePrefixOptimization" value="false"/>
+  <ns1:parameter name="sendXMLDeclaration" value="true"/>
+  <ns1:parameter name="sendXsiTypes" value="true"/>
+  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
+  <ns1:requestFlow>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="session"/>
+   </ns1:handler>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="request"/>
+    <ns1:parameter name="extension" value=".jwr"/>
+   </ns1:handler>
+  </ns1:requestFlow>
+ </ns1:globalConfiguration>
+ <ns1:handler name="URLMapper" type="java:org.apache.axis.handlers.http.URLMapper"/>
+ <ns1:handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler"/>
+ <ns1:handler name="LocalResponder" type="java:org.apache.axis.transport.local.LocalResponder"/>
+ <ns1:service name="AdminService" provider="java:MSG">
+  <ns1:parameter name="allowedMethods" value="AdminService"/>
+  <ns1:parameter name="enableRemoteAdmin" value="false"/>
+  <ns1:parameter name="className" value="org.apache.axis.utils.Admin"/>
+  <ns1:namespace>http://xml.apache.org/axis/wsdd/</ns1:namespace>
+ </ns1:service>
+ <ns1:service name="Version" provider="java:RPC">
+  <ns1:parameter name="allowedMethods" value="getVersion"/>
+  <ns1:parameter name="className" value="org.apache.axis.Version"/>
+ </ns1:service>
+ <ns1:service name="EiffelSellService" provider="java:RPC" style="wrapped" use="literal">
+  <ns2:operation name="validerachatpanier" qname="ns1:validerachatpanier" returnQName="ns1:validerachatpanierReturn" returnType="xsd:boolean" soapAction="" xmlns:ns1="http://business.uge.fr" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://xml.apache.org/axis/wsdd/">
+   <ns2:parameter qname="ns1:p" type="xsd:int"/>
+  </ns2:operation>
+  <ns1:operation name="totalpanier" qname="ns2:totalpanier" returnQName="ns2:totalpanierReturn" returnType="xsd:double" soapAction="" xmlns:ns2="http://business.uge.fr" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns2:p" type="xsd:int"/>
+  </ns1:operation>
+  <ns1:operation name="nouveauclient" qname="ns3:nouveauclient" returnQName="ns3:nouveauclientReturn" returnType="xsd:boolean" soapAction="" xmlns:ns3="http://business.uge.fr" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns3:a" type="ns4:Utilisateur" xmlns:ns4="http://commun"/>
+   <ns1:parameter qname="ns3:s" type="xsd:double"/>
+  </ns1:operation>
+  <ns1:operation name="viderpanier" qname="ns5:viderpanier" returnQName="ns5:viderpanierReturn" returnType="xsd:boolean" soapAction="" xmlns:ns5="http://business.uge.fr" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns5:p" type="xsd:int"/>
+  </ns1:operation>
+  <ns1:operation name="supprimervoiturepanier" qname="ns6:supprimervoiturepanier" returnQName="ns6:supprimervoiturepanierReturn" returnType="xsd:boolean" soapAction="" xmlns:ns6="http://business.uge.fr" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns6:p" type="xsd:int"/>
+   <ns1:parameter qname="ns6:v" type="xsd:int"/>
+  </ns1:operation>
+  <ns1:operation name="getPanierbyutilisateur" qname="ns7:getPanierbyutilisateur" returnQName="ns7:getPanierbyutilisateurReturn" returnType="ns8:Panier" soapAction="" xmlns:ns7="http://business.uge.fr" xmlns:ns8="http://commun">
+   <ns1:parameter qname="ns7:u" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="ajoutervoiturepanier" qname="ns9:ajoutervoiturepanier" returnQName="ns9:ajoutervoiturepanierReturn" returnType="xsd:boolean" soapAction="" xmlns:ns9="http://business.uge.fr" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns9:p" type="xsd:int"/>
+   <ns1:parameter qname="ns9:u" type="xsd:int"/>
+   <ns1:parameter qname="ns9:v" type="xsd:int"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="getPanierbyutilisateur ajoutervoiturepanier nouveauclient validerachatpanier totalpanier viderpanier supprimervoiturepanier"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="EiffelSellService"/>
+  <ns1:parameter name="className" value="fr.uge.business.EiffelSellService"/>
+  <ns1:parameter name="wsdlServicePort" value="EiffelSellService"/>
+  <ns1:parameter name="schemaQualified" value="http://business.uge.fr,http://commun"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://business.uge.fr"/>
+  <ns1:parameter name="wsdlServiceElement" value="EiffelSellServiceService"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns10:Utilisateur" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:commun.Utilisateur" xmlns:ns10="http://commun"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns11:Voiture" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:commun.Voiture" xmlns:ns11="http://commun"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns12:Panier" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:commun.Panier" xmlns:ns12="http://commun"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns13:Role" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:commun.Role" xmlns:ns13="http://commun"/>
+ </ns1:service>
+ <ns1:transport name="http">
+  <ns1:requestFlow>
+   <ns1:handler type="URLMapper"/>
+   <ns1:handler type="java:org.apache.axis.handlers.http.HTTPAuthHandler"/>
+  </ns1:requestFlow>
+  <ns1:parameter name="qs:list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs:wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+  <ns1:parameter name="qs.list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs.method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs:method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs.wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+ </ns1:transport>
+ <ns1:transport name="local">
+  <ns1:responseFlow>
+   <ns1:handler type="LocalResponder"/>
+  </ns1:responseFlow>
+ </ns1:transport>
+</ns1:deployment>

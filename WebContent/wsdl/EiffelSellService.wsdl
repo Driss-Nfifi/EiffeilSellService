@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://business.uge.fr" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://business.uge.fr" xmlns:intf="http://business.uge.fr" xmlns:tns1="http://commun" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://business.uge.fr" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://commun"/>
+   <element name="validerachatpanier">
+    <complexType>
+     <sequence>
+      <element name="p" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="validerachatpanierResponse">
+    <complexType>
+     <sequence>
+      <element name="validerachatpanierReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="totalpanier">
+    <complexType>
+     <sequence>
+      <element name="p" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="totalpanierResponse">
+    <complexType>
+     <sequence>
+      <element name="totalpanierReturn" type="xsd:double"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="nouveauclient">
+    <complexType>
+     <sequence>
+      <element name="a" type="tns1:Utilisateur"/>
+      <element name="s" type="xsd:double"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="nouveauclientResponse">
+    <complexType>
+     <sequence>
+      <element name="nouveauclientReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="viderpanier">
+    <complexType>
+     <sequence>
+      <element name="p" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="viderpanierResponse">
+    <complexType>
+     <sequence>
+      <element name="viderpanierReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="supprimervoiturepanier">
+    <complexType>
+     <sequence>
+      <element name="p" type="xsd:int"/>
+      <element name="v" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="supprimervoiturepanierResponse">
+    <complexType>
+     <sequence>
+      <element name="supprimervoiturepanierReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getPanierbyutilisateur">
+    <complexType>
+     <sequence>
+      <element name="u" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getPanierbyutilisateurResponse">
+    <complexType>
+     <sequence>
+      <element name="getPanierbyutilisateurReturn" type="tns1:Panier"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="ajoutervoiturepanier">
+    <complexType>
+     <sequence>
+      <element name="p" type="xsd:int"/>
+      <element name="u" type="xsd:int"/>
+      <element name="v" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="ajoutervoiturepanierResponse">
+    <complexType>
+     <sequence>
+      <element name="ajoutervoiturepanierReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://commun" xmlns="http://www.w3.org/2001/XMLSchema">
+   <complexType name="Role">
+    <sequence>
+     <element name="idRole" type="xsd:int"/>
+     <element name="role" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="Utilisateur">
+    <sequence>
+     <element name="adressU" nillable="true" type="xsd:string"/>
+     <element name="emailU" nillable="true" type="xsd:string"/>
+     <element name="idUtilisateur" type="xsd:int"/>
+     <element name="mdp" nillable="true" type="xsd:string"/>
+     <element name="nomU" nillable="true" type="xsd:string"/>
+     <element name="prenomU" nillable="true" type="xsd:string"/>
+     <element name="role" nillable="true" type="tns1:Role"/>
+     <element name="telephoneU" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="Voiture">
+    <sequence>
+     <element name="descriptionVoiture" nillable="true" type="xsd:string"/>
+     <element name="disponible" type="xsd:boolean"/>
+     <element name="idVoiture" type="xsd:int"/>
+     <element name="marqueVoiture" nillable="true" type="xsd:string"/>
+     <element name="matriculeVoiture" nillable="true" type="xsd:string"/>
+     <element name="modelVoiture" nillable="true" type="xsd:string"/>
+     <element name="nbrLocation" type="xsd:int"/>
+     <element name="nomVoiture" nillable="true" type="xsd:string"/>
+     <element name="photoVoiture" nillable="true" type="xsd:string"/>
+     <element name="prixVoiture" type="xsd:double"/>
+    </sequence>
+   </complexType>
+   <complexType name="Panier">
+    <sequence>
+     <element name="idPanier" type="xsd:int"/>
+     <element name="idUtilisateur" type="xsd:int"/>
+     <element name="prixTotal" type="xsd:double"/>
+     <element name="voiture" nillable="true" type="tns1:Voiture"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="getPanierbyutilisateurRequest">
+
+      <wsdl:part element="impl:getPanierbyutilisateur" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="supprimervoiturepanierResponse">
+
+      <wsdl:part element="impl:supprimervoiturepanierResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="nouveauclientResponse">
+
+      <wsdl:part element="impl:nouveauclientResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="ajoutervoiturepanierRequest">
+
+      <wsdl:part element="impl:ajoutervoiturepanier" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="viderpanierRequest">
+
+      <wsdl:part element="impl:viderpanier" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="viderpanierResponse">
+
+      <wsdl:part element="impl:viderpanierResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="totalpanierRequest">
+
+      <wsdl:part element="impl:totalpanier" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="validerachatpanierRequest">
+
+      <wsdl:part element="impl:validerachatpanier" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="validerachatpanierResponse">
+
+      <wsdl:part element="impl:validerachatpanierResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="supprimervoiturepanierRequest">
+
+      <wsdl:part element="impl:supprimervoiturepanier" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="totalpanierResponse">
+
+      <wsdl:part element="impl:totalpanierResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="nouveauclientRequest">
+
+      <wsdl:part element="impl:nouveauclient" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="ajoutervoiturepanierResponse">
+
+      <wsdl:part element="impl:ajoutervoiturepanierResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getPanierbyutilisateurResponse">
+
+      <wsdl:part element="impl:getPanierbyutilisateurResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="EiffelSellService">
+
+      <wsdl:operation name="validerachatpanier">
+
+         <wsdl:input message="impl:validerachatpanierRequest" name="validerachatpanierRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:validerachatpanierResponse" name="validerachatpanierResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="totalpanier">
+
+         <wsdl:input message="impl:totalpanierRequest" name="totalpanierRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:totalpanierResponse" name="totalpanierResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="nouveauclient">
+
+         <wsdl:input message="impl:nouveauclientRequest" name="nouveauclientRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:nouveauclientResponse" name="nouveauclientResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="viderpanier">
+
+         <wsdl:input message="impl:viderpanierRequest" name="viderpanierRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:viderpanierResponse" name="viderpanierResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="supprimervoiturepanier">
+
+         <wsdl:input message="impl:supprimervoiturepanierRequest" name="supprimervoiturepanierRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:supprimervoiturepanierResponse" name="supprimervoiturepanierResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getPanierbyutilisateur">
+
+         <wsdl:input message="impl:getPanierbyutilisateurRequest" name="getPanierbyutilisateurRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getPanierbyutilisateurResponse" name="getPanierbyutilisateurResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="ajoutervoiturepanier">
+
+         <wsdl:input message="impl:ajoutervoiturepanierRequest" name="ajoutervoiturepanierRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:ajoutervoiturepanierResponse" name="ajoutervoiturepanierResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="EiffelSellServiceSoapBinding" type="impl:EiffelSellService">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="validerachatpanier">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="validerachatpanierRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="validerachatpanierResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="totalpanier">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="totalpanierRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="totalpanierResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="nouveauclient">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="nouveauclientRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="nouveauclientResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="viderpanier">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="viderpanierRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="viderpanierResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="supprimervoiturepanier">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="supprimervoiturepanierRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="supprimervoiturepanierResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getPanierbyutilisateur">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getPanierbyutilisateurRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getPanierbyutilisateurResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="ajoutervoiturepanier">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="ajoutervoiturepanierRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="ajoutervoiturepanierResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="EiffelSellServiceService">
+
+      <wsdl:port binding="impl:EiffelSellServiceSoapBinding" name="EiffelSellService">
+
+         <wsdlsoap:address location="http://localhost/EiffelSellService/services/EiffelSellService"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
